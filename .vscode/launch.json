@@ -1,0 +1,89 @@
+{
+  "version": "2.0.0",
+  "compounds": [
+    {
+      "name": "Parallel GDB np = 3 (launch)",
+      "preLaunchTask": "Launch GDB servers",
+      "configurations": [
+        "Rank0",
+        "Rank1",
+        "Rank2"
+      ],
+      "stopAll": false,
+    },
+  ],
+  "configurations": [    
+    {      
+      "name": "Rank0",
+      "type": "cppdbg",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/gatherv-test",
+      "miDebuggerServerAddress": "localhost:20000",
+      "MIMode": "gdb",
+      "symbolLoadInfo": {
+        "loadAll": true,
+        "exceptionList": ""
+      },
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ],
+      "presentation": { "hidden": true }
+    },
+    {
+      "name": "Rank1",
+      "type": "cppdbg",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "gatherv-test",
+      "miDebuggerServerAddress": "localhost:20001",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ],
+      "presentation": { "hidden": true }
+    },
+
+    {
+      "name": "Rank2",
+      "type": "cppdbg",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "gatherv-test",
+      "miDebuggerServerAddress": "localhost:20002",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ],
+      "presentation": { "hidden": true }
+    },
+
+  ],
+}

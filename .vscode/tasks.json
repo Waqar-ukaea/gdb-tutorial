@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+    "group": {
+      "kind": "build",
+      "isDefault": true
+    },
+    "command":["mpic++ -g mpi_gatherv.cpp -o gatherv-test"]
+  },
+
+  {
+    "label": "Launch GDB servers",
+    "isBackground": true,
+    "options": {
+      "cwd": "${workspaceRoot}"
+    },
+    "command": "mpiexec -n 1 gdbserver :20000 gatherv-test : -n 1 gdbserver :20001 gatherv-test : -n 1 gdbserver :20002 gatherv-test",
+    "type": "shell",
+  
+    "problemMatcher": [
+      {
+        "pattern": [
+          {
+            "regexp": ".",
+            "file": 1,
+            "location": 2,
+            "message": 3
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": ".",
+        }
+      }
+    ]
+  },
+
+],
+
+}
+
